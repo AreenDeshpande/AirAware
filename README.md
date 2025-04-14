@@ -1,4 +1,4 @@
-# Air Quality Index (AQI) Prediction System
+# AirAware (Air Quality Index (AQI) Prediction System)
 
 This project is a comprehensive Air Quality Index (AQI) prediction system built using time series forecasting. It predicts the AQI values using the Prophet model and provides a user-friendly interface for interacting with the system. The frontend is developed using React, while the backend is built with Flask, and MongoDB is used for storing air quality data.
 
