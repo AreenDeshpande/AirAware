@@ -67,22 +67,36 @@ const Weather = () => {
             </Grid>
 
             <Grid item xs={12} md={4}>
-              <Paper sx={{ p: 3 }}>
+              <Paper sx={{ 
+                p: 3,
+                background: 'rgba(19, 47, 76, 0.95)',
+                backdropFilter: 'blur(10px)',
+                borderRadius: '16px',
+                border: '1px solid rgba(66, 165, 245, 0.1)',
+                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)'
+              }}>
                 <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
                   <OpacityIcon sx={{ fontSize: 40, color: 'primary.main', mr: 2 }} />
-                  <Typography variant="h6">Humidity</Typography>
+                  <Typography variant="h6" sx={{ color: '#FFFFFF' }}>Humidity</Typography>
                 </Box>
-                <Typography variant="h4">{weatherData?.humidity}%</Typography>
+                <Typography variant="h4" sx={{ color: '#42A5F5' }}>{weatherData?.humidity}%</Typography>
               </Paper>
             </Grid>
 
             <Grid item xs={12} md={4}>
-              <Paper sx={{ p: 3 }}>
+              <Paper sx={{ 
+                p: 3,
+                background: 'rgba(19, 47, 76, 0.95)',
+                backdropFilter: 'blur(10px)',
+                borderRadius: '16px',
+                border: '1px solid rgba(66, 165, 245, 0.1)',
+                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)'
+              }}>
                 <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
                   <AirIcon sx={{ fontSize: 40, color: 'primary.main', mr: 2 }} />
-                  <Typography variant="h6">Wind Speed</Typography>
+                  <Typography variant="h6" sx={{ color: '#FFFFFF' }}>Wind Speed</Typography>
                 </Box>
-                <Typography variant="h4">{weatherData?.windSpeed} km/h</Typography>
+                <Typography variant="h4" sx={{ color: '#42A5F5' }}>{weatherData?.windSpeed} km/h</Typography>
               </Paper>
             </Grid>
 

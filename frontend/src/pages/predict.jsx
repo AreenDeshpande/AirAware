@@ -126,13 +126,20 @@ const Predict = () => {
               </Grid>
             </Grid>
 
-            <Button
-              type="submit"
-              variant="contained"
-              sx={{ mt: 4 }}
-              fullWidth
-            >
-              Predict AQI
+            <Button 
+                type="submit" 
+                variant="contained" 
+                fullWidth 
+                sx={{ 
+                  mt: 4,
+                  background: 'linear-gradient(45deg, #42A5F5 30%, #69F0AE 90%)',
+                  color: '#0A1929',
+                  fontWeight: 'bold',
+                  '&:hover': {
+                    background: 'linear-gradient(45deg, #90CAF9 30%, #B2FF59 90%)',
+                  }
+                }}>
+                Predict AQI
             </Button>
           </form>
 

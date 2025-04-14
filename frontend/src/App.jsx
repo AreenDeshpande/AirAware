@@ -29,24 +29,24 @@ function App() {
 
         {/* Protected Routes */}
         <Route path="/dashboard" element={
-          <PrivateRoute>
+          
             <Dashboard />
-          </PrivateRoute>
+          
         } />
         <Route path="/predict" element={
-          <PrivateRoute>
+          
             <Predict />
-          </PrivateRoute>
+          
         } />
         <Route path="/weather" element={
-          <PrivateRoute>
+          
             <Weather />
-          </PrivateRoute>
+          
         } />
         <Route path="/history" element={
-          <PrivateRoute>
+          
             <History />
-          </PrivateRoute>
+          
         } />
 
         {/* Fallback Route */}
