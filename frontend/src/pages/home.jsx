@@ -13,8 +13,9 @@ const Home = () => {
       <Navbar />
       <Box sx={{ 
         minHeight: '100vh',
-        background: 'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)',
-        pt: 12
+        background: 'linear-gradient(135deg, #0A1929 0%, #132F4C 100%)',
+        pt: 12,
+        pb: 8
       }}>
         <Container maxWidth="lg">
           <Grid container spacing={8} alignItems="center">
@@ -22,7 +23,7 @@ const Home = () => {
               <Typography variant="h2" sx={{ ...gradientText, fontWeight: 800, mb: 3 }}>
                 Smart Air Quality Predictions
               </Typography>
-              <Typography variant="h5" sx={{ color: '#555', lineHeight: 1.8, mb: 4 }}>
+              <Typography variant="h5" sx={{ color: '#B2BAC2', lineHeight: 1.8, mb: 4 }}>
                 Experience the future of air quality monitoring with our AI-powered prediction system. 
                 Make informed decisions about your outdoor activities with real-time AQI forecasts.
               </Typography>

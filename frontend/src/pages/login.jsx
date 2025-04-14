@@ -1,119 +1,122 @@
 import React, { useState } from 'react';
 import { Box, Container, TextField, Button, Typography, Paper, Alert } from '@mui/material';
-import { Link, useNavigate } from 'react-router-dom';
-import { gradientText, cardHoverEffect } from '../styles/theme';
+import { Link } from 'react-router-dom';
+import { gradientText } from '../styles/theme';
 import Navbar from '../components/Navbar';
-import LoginIcon from '@mui/icons-material/Login';
 
 const Login = () => {
-  const [formData, setFormData] = useState({ email: '', password: '' });
+  const [formData, setFormData] = useState({
+    email: '',
+    password: ''
+  });
   const [error, setError] = useState('');
-  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
-    try {
-      const response = await fetch('http://localhost:5000/api/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(credentials)
-      });
-      const data = await response.json();
-      
-      if (response.ok) {
-        localStorage.setItem('token', data.token);
-        navigate('/dashboard');
-      } else {
-        setError(data.message || 'Login failed');
-      }
-    } catch (error) {
-      setError('Network error occurred');
-      console.error('Login failed:', error);
-    }
+    // Add your login logic here
   };
 
   return (
-    <Box sx={{ 
-      minHeight: '100vh',
-      background: 'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)',
-      pt: 8
-    }}>
+    <Box>
       <Navbar />
-      <Container maxWidth="sm" sx={{ pt: 8 }}>
-        <Paper sx={{
-          p: 4,
-          borderRadius: '24px',
-          boxShadow: '0 8px 40px rgba(0,0,0,0.12)',
-          ...cardHoverEffect
-        }}>
-          <Box sx={{ textAlign: 'center', mb: 4 }}>
-            <LoginIcon sx={{ 
-              fontSize: 48, 
-              color: 'primary.main',
-              p: 1,
-              borderRadius: '50%',
-              backgroundColor: 'rgba(33, 150, 243, 0.1)',
-              mb: 2
-            }} />
-            <Typography variant="h4" sx={{ ...gradientText, fontWeight: 'bold' }}>
+      <Box sx={{ 
+        minHeight: '100vh',
+        background: 'linear-gradient(135deg, #0A1929 0%, #132F4C 100%)',
+        pt: 12
+      }}>
+        <Container maxWidth="sm">
+          <Paper sx={{
+            p: 4,
+            background: 'rgba(19, 47, 76, 0.95)',
+            backdropFilter: 'blur(10px)',
+            borderRadius: '24px',
+            border: '1px solid rgba(66, 165, 245, 0.1)',
+            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)'
+          }}>
+            <Typography variant="h4" sx={{ ...gradientText, mb: 4, textAlign: 'center' }}>
               Welcome Back
             </Typography>
-            <Typography variant="body1" color="text.secondary" sx={{ mt: 1 }}>
-              Enter your credentials to continue
-            </Typography>
-          </Box>
 
-          {error && <Alert severity="error" sx={{ mb: 3 }}>{error}</Alert>}
+            {error && <Alert severity="error" sx={{ mb: 3 }}>{error}</Alert>}
 
-          <form onSubmit={handleSubmit}>
-            <TextField
-              fullWidth
-              label="Email Address"
-              variant="outlined"
-              margin="normal"
-              value={formData.email}
-              onChange={(e) => setFormData({...formData, email: e.target.value})}
-              sx={{ mb: 2 }}
-            />
-            <TextField
-              fullWidth
-              label="Password"
-              type="password"
-              variant="outlined"
-              margin="normal"
-              value={formData.password}
-              onChange={(e) => setFormData({...formData, password: e.target.value})}
-              sx={{ mb: 3 }}
-            />
-            <Button
-              fullWidth
-              type="submit"
-              variant="contained"
-              size="large"
-              sx={{
-                background: 'linear-gradient(45deg, #2196F3 30%, #00BFA5 90%)',
-                color: 'white',
-                mb: 2
-              }}
-            >
-              Login
-            </Button>
-            <Box sx={{ textAlign: 'center', mt: 2 }}>
-              <Typography variant="body2" color="text.secondary">
-                Don't have an account?{' '}
-                <Link to="/signup" style={{ 
-                  color: '#2196F3',
-                  textDecoration: 'none',
-                  fontWeight: 500
-                }}>
-                  Sign up
-                </Link>
-              </Typography>
-            </Box>
-          </form>
-        </Paper>
-      </Container>
+            <form onSubmit={handleSubmit}>
+              <TextField
+                fullWidth
+                label="Email"
+                margin="normal"
+                value={formData.email}
+                onChange={(e) => setFormData({...formData, email: e.target.value})}
+                sx={{
+                  '& .MuiOutlinedInput-root': {
+                    color: '#FFFFFF',
+                    '& fieldset': {
+                      borderColor: 'rgba(66, 165, 245, 0.3)',
+                    },
+                    '&:hover fieldset': {
+                      borderColor: 'rgba(66, 165, 245, 0.5)',
+                    },
+                  },
+                  '& .MuiInputLabel-root': {
+                    color: '#B2BAC2',
+                  }
+                }}
+              />
+              <TextField
+                fullWidth
+                label="Password"
+                type="password"
+                margin="normal"
+                value={formData.password}
+                onChange={(e) => setFormData({...formData, password: e.target.value})}
+                sx={{
+                  '& .MuiOutlinedInput-root': {
+                    color: '#FFFFFF',
+                    '& fieldset': {
+                      borderColor: 'rgba(66, 165, 245, 0.3)',
+                    },
+                    '&:hover fieldset': {
+                      borderColor: 'rgba(66, 165, 245, 0.5)',
+                    },
+                  },
+                  '& .MuiInputLabel-root': {
+                    color: '#B2BAC2',
+                  }
+                }}
+              />
+              <Button
+                fullWidth
+                type="submit"
+                variant="contained"
+                size="large"
+                sx={{
+                  mt: 3,
+                  mb: 2,
+                  background: 'linear-gradient(45deg, #42A5F5 30%, #69F0AE 90%)',
+                  color: '#0A1929',
+                  fontWeight: 'bold',
+                  '&:hover': {
+                    background: 'linear-gradient(45deg, #90CAF9 30%, #B2FF59 90%)',
+                  }
+                }}
+              >
+                Login
+              </Button>
+              <Box sx={{ textAlign: 'center', mt: 2 }}>
+                <Typography variant="body2" sx={{ color: '#B2BAC2' }}>
+                  Don't have an account?{' '}
+                  <Link to="/signup" style={{ 
+                    color: '#42A5F5',
+                    textDecoration: 'none',
+                    fontWeight: 500
+                  }}>
+                    Sign Up
+                  </Link>
+                </Typography>
+              </Box>
+            </form>
+          </Paper>
+        </Container>
+      </Box>
     </Box>
   );
 };

@@ -15,27 +15,27 @@ const About = () => {
       <Navbar />
       <Box sx={{ 
         minHeight: '100vh',
-        background: 'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)',
+        background: 'linear-gradient(135deg, #0A1929 0%, #132F4C 100%)',
         pt: 12,
         pb: 8
       }}>
         <Container maxWidth="lg">
+          {/* Hero section */}
           <Grid container spacing={8} alignItems="center">
             <Grid item xs={12} md={6}>
               <Typography variant="h2" sx={{ ...gradientText, fontWeight: 800, mb: 3 }}>
                 Innovative Air Quality Technology
               </Typography>
-              <Typography variant="h5" sx={{ color: '#555', lineHeight: 1.8, mb: 4 }}>
+              <Typography variant="h5" sx={{ color: '#B2BAC2', lineHeight: 1.8, mb: 4 }}>
                 Our cutting-edge AQI prediction system harnesses the power of advanced machine learning 
-                and real-time data processing to deliver accurate forecasts. We're committed to helping 
-                you make informed decisions about air quality.
+                and real-time data processing to deliver accurate forecasts.
               </Typography>
             </Grid>
             <Grid item xs={12} md={6}>
               <Box sx={{ position: 'relative' }}>
                 <ScienceIcon sx={{ 
                   fontSize: 350, 
-                  color: 'rgba(33, 150, 243, 0.1)',
+                  color: 'rgba(66, 165, 245, 0.15)',
                   position: 'absolute',
                   right: -50,
                   top: -50,
@@ -45,6 +45,7 @@ const About = () => {
             </Grid>
           </Grid>
 
+          {/* Features section */}
           <Box sx={{ mt: 12, mb: 8 }}>
             <Typography variant="h3" align="center" sx={{ ...gradientText, mb: 8, fontWeight: 700 }}>
               Our Advanced Approach
@@ -87,12 +88,13 @@ const About = () => {
                     <Card sx={{
                       height: '100%',
                       borderRadius: '24px',
-                      background: 'rgba(255, 255, 255, 0.9)',
+                      background: 'rgba(19, 47, 76, 0.95)',
                       backdropFilter: 'blur(10px)',
                       display: 'flex',
                       flexDirection: 'column',
                       justifyContent: 'space-between',
-                      boxShadow: 3,
+                      boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
+                      border: '1px solid rgba(66, 165, 245, 0.1)',
                       ...cardHoverEffect
                     }}>
                       <CardContent sx={{ 
@@ -109,7 +111,7 @@ const About = () => {
                             display: 'inline-flex',
                             p: 2,
                             borderRadius: '50%',
-                            background: 'rgba(33, 150, 243, 0.1)'
+                            background: 'rgba(66, 165, 245, 0.15)'
                           }}>
                             {feature.icon}
                           </Box>
@@ -118,17 +120,18 @@ const About = () => {
                             gutterBottom 
                             sx={{ 
                               fontWeight: 600,
-                              fontSize: { xs: '1.25rem', md: '1.5rem' }
+                              fontSize: { xs: '1.25rem', md: '1.5rem' },
+                              color: '#FFFFFF'
                             }}
                           >
                             {feature.title}
                           </Typography>
                           <Typography 
-                            variant="body1" 
-                            color="text.secondary" 
+                            variant="body1"
                             sx={{ 
                               lineHeight: 1.8,
-                              fontSize: { xs: '0.875rem', md: '1rem' }
+                              fontSize: { xs: '0.875rem', md: '1rem' },
+                              color: '#B2BAC2'
                             }}
                           >
                             {feature.description}
