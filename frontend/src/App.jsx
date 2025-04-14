@@ -8,6 +8,8 @@ import Dashboard from './pages/dashboard';
 import Predict from './pages/predict';
 import Weather from './pages/weather';
 import History from './pages/history';
+import { ThemeProvider } from '@mui/material';
+import { theme } from './styles/theme';
 
 const PrivateRoute = ({ children }) => {
   const token = localStorage.getItem('token');
@@ -16,8 +18,9 @@ const PrivateRoute = ({ children }) => {
 
 function App() {
   return (
-    <Router>
-      <Routes>
+    <ThemeProvider theme={theme}>
+      <Router>
+        <Routes>
         {/* Public Routes */}
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
@@ -49,7 +52,8 @@ function App() {
         {/* Fallback Route */}
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
-    </Router>
+      </Router>
+    </ThemeProvider>
   );
 }
 

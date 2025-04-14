@@ -1,13 +1,13 @@
 import React from 'react';
-import { Box, Container, Typography, Grid, Paper, AppBar, Toolbar, Button } from '@mui/material';
-import { Link } from 'react-router-dom';
-import AirIcon from '@mui/icons-material/Air';
+import { Box, Container, Typography, Grid, Card, CardContent } from '@mui/material';
+import { gradientText, cardHoverEffect } from '../styles/theme';
+import Navbar from '../components/Navbar';
 import PrecisionManufacturingIcon from '@mui/icons-material/PrecisionManufacturing';
-import DataArrayIcon from '@mui/icons-material/DataArray';
-import BarChartIcon from '@mui/icons-material/BarChart';
 import ScienceIcon from '@mui/icons-material/Science';
 import SpeedIcon from '@mui/icons-material/Speed';
-import Navbar from '../components/Navbar';
+import BarChartIcon from '@mui/icons-material/BarChart';
+import CloudSyncIcon from '@mui/icons-material/CloudSync';
+import SecurityIcon from '@mui/icons-material/Security';
 
 const About = () => {
   return (
@@ -16,127 +16,129 @@ const About = () => {
       <Box sx={{ 
         minHeight: '100vh',
         background: 'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)',
-        pt: 8 // Add padding top for fixed navbar
+        pt: 12,
+        pb: 8
       }}>
-        <Container maxWidth="lg" sx={{ pt: 8 }}>
-          <Grid container spacing={6} alignItems="center" justifyContent="center">
+        <Container maxWidth="lg">
+          <Grid container spacing={8} alignItems="center">
             <Grid item xs={12} md={6}>
-              <Typography
-                variant="h2"
-                sx={{
-                  fontWeight: 'bold',
-                  mb: 3,
-                  background: 'linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent'
-                }}
-              >
-                About Our Technology
+              <Typography variant="h2" sx={{ ...gradientText, fontWeight: 800, mb: 3 }}>
+                Innovative Air Quality Technology
               </Typography>
-              <Typography variant="h6" sx={{ color: '#555', mb: 4, lineHeight: 1.8 }}>
-                Our AQI prediction system combines cutting-edge machine learning algorithms with real-time environmental data 
-                to provide accurate air quality forecasts. We utilize advanced neural networks and ensemble methods to analyze 
-                multiple parameters and deliver reliable predictions.
+              <Typography variant="h5" sx={{ color: '#555', lineHeight: 1.8, mb: 4 }}>
+                Our cutting-edge AQI prediction system harnesses the power of advanced machine learning 
+                and real-time data processing to deliver accurate forecasts. We're committed to helping 
+                you make informed decisions about air quality.
               </Typography>
             </Grid>
             <Grid item xs={12} md={6}>
-              <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-                <ScienceIcon sx={{ fontSize: 300, color: 'rgba(33, 150, 243, 0.3)' }} />
+              <Box sx={{ position: 'relative' }}>
+                <ScienceIcon sx={{ 
+                  fontSize: 350, 
+                  color: 'rgba(33, 150, 243, 0.1)',
+                  position: 'absolute',
+                  right: -50,
+                  top: -50,
+                  transform: 'rotate(-15deg)'
+                }} />
               </Box>
             </Grid>
           </Grid>
-        </Container>
 
-        <Container maxWidth="lg" sx={{ py: 12 }}>
-          <Typography 
-            variant="h3" 
-            align="center" 
-            sx={{ 
-              mb: 8,
-              fontWeight: 'bold',
-              background: 'linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent'
-            }}
-          >
-            Our Approach
-          </Typography>
-          <Box sx={{ 
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'stretch'
-          }}>
-            <Grid container spacing={4} maxWidth="lg" justifyContent="center">
-              <Grid item xs={12} md={4}>
-                <Paper elevation={3} sx={{ 
-                  height: '100%',
-                  transition: 'all 0.3s ease',
-                  borderRadius: '20px',
-                  overflow: 'hidden',
-                  boxShadow: '0 8px 40px rgba(0,0,0,0.12)',
-                  '&:hover': {
-                    transform: 'translateY(-10px)',
-                    boxShadow: '0 12px 50px rgba(0,0,0,0.16)'
-                  }
-                }}>
-                  <Box sx={{ textAlign: 'center' }}>
-                    <PrecisionManufacturingIcon sx={{ fontSize: 70, color: '#2196F3', mb: 2 }} />
-                    <Typography variant="h5" gutterBottom sx={{ fontWeight: 'bold' }}>
-                      Machine Learning
-                    </Typography>
-                    <Typography variant="body1" color="text.secondary">
-                      Advanced ML algorithms trained on extensive historical data to provide accurate predictions.
-                      Our models continuously learn and adapt to changing patterns.
-                    </Typography>
+          <Box sx={{ mt: 12, mb: 8 }}>
+            <Typography variant="h3" align="center" sx={{ ...gradientText, mb: 8, fontWeight: 700 }}>
+              Our Advanced Approach
+            </Typography>
+            <Grid container spacing={4} justifyContent="center">
+              {[
+                {
+                  icon: <PrecisionManufacturingIcon sx={{ fontSize: 60, color: '#2196F3' }} />,
+                  title: "Machine Learning Excellence",
+                  description: "State-of-the-art ML algorithms trained on extensive historical data ensure highly accurate predictions and adaptive learning capabilities."
+                },
+                {
+                  icon: <SpeedIcon sx={{ fontSize: 60, color: '#00BFA5' }} />,
+                  title: "Real-time Processing",
+                  description: "Lightning-fast data processing enables instant updates and continuous monitoring of multiple air quality parameters."
+                },
+                {
+                  icon: <BarChartIcon sx={{ fontSize: 60, color: '#FF4081' }} />,
+                  title: "Advanced Analytics",
+                  description: "Comprehensive data analysis tools provide deep insights into air quality trends and patterns."
+                },
+                {
+                  icon: <CloudSyncIcon sx={{ fontSize: 60, color: '#7C4DFF' }} />,
+                  title: "Cloud Integration",
+                  description: "Seamless cloud infrastructure ensures reliable data storage and instant access to historical information."
+                },
+                {
+                  icon: <SecurityIcon sx={{ fontSize: 60, color: '#FF6E40' }} />,
+                  title: "Secure Platform",
+                  description: "Enterprise-grade security measures protect your data while maintaining easy accessibility."
+                },
+                {
+                  icon: <ScienceIcon sx={{ fontSize: 60, color: '#00B8D4' }} />,
+                  title: "Scientific Accuracy",
+                  description: "Research-backed methodologies and continuous validation ensure prediction reliability."
+                }
+              ].map((feature, index) => (
+                <Grid item xs={12} sm={6} md={4} key={index}>
+                  <Box sx={{ height: '100%', p: 1 }}>
+                    <Card sx={{
+                      height: '100%',
+                      borderRadius: '24px',
+                      background: 'rgba(255, 255, 255, 0.9)',
+                      backdropFilter: 'blur(10px)',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      justifyContent: 'space-between',
+                      boxShadow: 3,
+                      ...cardHoverEffect
+                    }}>
+                      <CardContent sx={{ 
+                        textAlign: 'center',
+                        p: { xs: 2, md: 3 },
+                        flex: 1,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'space-between'
+                      }}>
+                        <Box>
+                          <Box sx={{
+                            mb: 3,
+                            display: 'inline-flex',
+                            p: 2,
+                            borderRadius: '50%',
+                            background: 'rgba(33, 150, 243, 0.1)'
+                          }}>
+                            {feature.icon}
+                          </Box>
+                          <Typography 
+                            variant="h5" 
+                            gutterBottom 
+                            sx={{ 
+                              fontWeight: 600,
+                              fontSize: { xs: '1.25rem', md: '1.5rem' }
+                            }}
+                          >
+                            {feature.title}
+                          </Typography>
+                          <Typography 
+                            variant="body1" 
+                            color="text.secondary" 
+                            sx={{ 
+                              lineHeight: 1.8,
+                              fontSize: { xs: '0.875rem', md: '1rem' }
+                            }}
+                          >
+                            {feature.description}
+                          </Typography>
+                        </Box>
+                      </CardContent>
+                    </Card>
                   </Box>
-                </Paper>
-              </Grid>
-
-              <Grid item xs={12} md={4}>
-                <Paper elevation={3} sx={{ 
-                  p: 4, 
-                  height: '100%',
-                  transition: 'transform 0.3s',
-                  '&:hover': {
-                    transform: 'translateY(-10px)',
-                    boxShadow: 5
-                  }
-                }}>
-                  <Box sx={{ textAlign: 'center' }}>
-                    <SpeedIcon sx={{ fontSize: 70, color: '#2196F3', mb: 2 }} />
-                    <Typography variant="h5" gutterBottom sx={{ fontWeight: 'bold' }}>
-                      Real-time Processing
-                    </Typography>
-                    <Typography variant="body1" color="text.secondary">
-                      Instant processing of environmental data to provide up-to-date predictions.
-                      Real-time monitoring of multiple air quality parameters.
-                    </Typography>
-                  </Box>
-                </Paper>
-              </Grid>
-
-              <Grid item xs={12} md={4}>
-                <Paper elevation={3} sx={{ 
-                  p: 4, 
-                  height: '100%',
-                  transition: 'transform 0.3s',
-                  '&:hover': {
-                    transform: 'translateY(-10px)',
-                    boxShadow: 5
-                  }
-                }}>
-                  <Box sx={{ textAlign: 'center' }}>
-                    <BarChartIcon sx={{ fontSize: 70, color: '#2196F3', mb: 2 }} />
-                    <Typography variant="h5" gutterBottom sx={{ fontWeight: 'bold' }}>
-                      Data Analytics
-                    </Typography>
-                    <Typography variant="body1" color="text.secondary">
-                      Comprehensive analysis of historical trends and patterns.
-                      Advanced visualization tools for better understanding.
-                    </Typography>
-                  </Box>
-                </Paper>
-              </Grid>
+                </Grid>
+              ))}
             </Grid>
           </Box>
         </Container>

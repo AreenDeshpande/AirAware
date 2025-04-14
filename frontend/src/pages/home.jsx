@@ -1,11 +1,11 @@
 import React from 'react';
-import { Box, Container, Typography, Button, Grid, Card, CardContent, AppBar, Toolbar } from '@mui/material';
-import { Link } from 'react-router-dom';
-import AirIcon from '@mui/icons-material/Air';
-import CloudIcon from '@mui/icons-material/Cloud';
-import TimelineIcon from '@mui/icons-material/Timeline';
-import BarChartIcon from '@mui/icons-material/BarChart';
+import { Box, Container, Typography, Grid, Card, CardContent } from '@mui/material';
+import { gradientText, cardHoverEffect } from '../styles/theme';
 import Navbar from '../components/Navbar';
+import AirQualityIcon from '@mui/icons-material/Air';
+import CloudQueueIcon from '@mui/icons-material/CloudQueue';
+import TimelineIcon from '@mui/icons-material/Timeline';
+import AnalyticsIcon from '@mui/icons-material/Analytics';
 
 const Home = () => {
   return (
@@ -14,143 +14,101 @@ const Home = () => {
       <Box sx={{ 
         minHeight: '100vh',
         background: 'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)',
-        pt: 8 // Add padding top for fixed navbar
+        pt: 12
       }}>
-        <Container maxWidth="lg" sx={{ pt: 8 }}>
-          <Grid container spacing={6} alignItems="center" justifyContent="center">
+        <Container maxWidth="lg">
+          <Grid container spacing={8} alignItems="center">
             <Grid item xs={12} md={6}>
-              <Typography
-                variant="h2"
-                sx={{
-                  fontWeight: 'bold',
-                  mb: 3,
-                  background: 'linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent'
-                }}
-              >
-                Predict Air Quality with AI
+              <Typography variant="h2" sx={{ ...gradientText, fontWeight: 800, mb: 3 }}>
+                Smart Air Quality Predictions
               </Typography>
-              <Typography variant="h5" sx={{ color: '#666', mb: 4 }}>
-                Get accurate AQI predictions powered by machine learning. Make informed decisions about your outdoor activities.
+              <Typography variant="h5" sx={{ color: '#555', lineHeight: 1.8, mb: 4 }}>
+                Experience the future of air quality monitoring with our AI-powered prediction system. 
+                Make informed decisions about your outdoor activities with real-time AQI forecasts.
               </Typography>
-              <Box sx={{ display: 'flex', gap: 2 }}>
-                <Button 
-                  variant="contained" 
-                  component={Link} 
-                  to="/signup"
-                  size="large"
-                  sx={{
-                    background: 'linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)',
-                    color: 'white',
-                    px: 4,
-                    py: 2
-                  }}
-                >
-                  Get Started
-                </Button>
-                <Button 
-                  variant="outlined" 
-                  component={Link} 
-                  to="/about"
-                  size="large"
-                  sx={{ px: 4, py: 2 }}
-                >
-                  Learn More
-                </Button>
-              </Box>
             </Grid>
             <Grid item xs={12} md={6}>
-              <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-                <BarChartIcon sx={{ fontSize: 300, color: 'rgba(33, 150, 243, 0.3)' }} />
+              <Box sx={{ position: 'relative' }}>
+                <AnalyticsIcon sx={{ 
+                  fontSize: 350, 
+                  color: 'rgba(33, 150, 243, 0.1)',
+                  position: 'absolute',
+                  right: -50,
+                  top: -50,
+                  transform: 'rotate(-15deg)'
+                }} />
+                <Box sx={{ 
+                  position: 'relative',
+                  zIndex: 1,
+                  display: 'flex',
+                  justifyContent: 'center'
+                }}>
+                  <img 
+                    src="/assets/aqi-chart.png" 
+                    alt="AQI Chart" 
+                    style={{ 
+                      maxWidth: '100%',
+                      height: 'auto',
+                      borderRadius: '24px',
+                      boxShadow: '0 20px 40px rgba(0,0,0,0.1)'
+                    }} 
+                  />
+                </Box>
               </Box>
             </Grid>
           </Grid>
-        </Container>
 
-        <Container maxWidth="lg" sx={{ py: 12 }}>
-          <Typography 
-            variant="h3" 
-            align="center" 
-            sx={{ 
-              mb: 8,
-              fontWeight: 'bold',
-              background: 'linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent'
-            }}
-          >
-            Features
-          </Typography>
-          <Box sx={{ 
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'stretch'
-          }}>
-            <Grid container spacing={4} maxWidth="lg" justifyContent="center">
-              <Grid item xs={12} md={4}>
-                <Card sx={{ 
-                  height: '100%',
-                  transition: 'all 0.3s ease',
-                  borderRadius: '20px',
-                  overflow: 'hidden',
-                  boxShadow: '0 8px 40px rgba(0,0,0,0.12)',
-                  '&:hover': {
-                    transform: 'translateY(-10px)',
-                    boxShadow: '0 12px 50px rgba(0,0,0,0.16)'
-                  }
-                }}>
-                  <CardContent sx={{ textAlign: 'center', p: 4 }}>
-                    <AirIcon sx={{ fontSize: 60, color: '#2196F3', mb: 2 }} />
-                    <Typography gutterBottom variant="h5" component="h2" sx={{ fontWeight: 'bold' }}>
-                      AQI Prediction
-                    </Typography>
-                    <Typography variant="body1" color="text.secondary">
-                      Advanced ML models provide accurate Air Quality Index predictions to help you plan your activities.
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </Grid>
-              <Grid item xs={12} md={4}>
-                <Card sx={{ 
-                  height: '100%',
-                  transition: 'transform 0.3s',
-                  '&:hover': {
-                    transform: 'translateY(-10px)',
-                    boxShadow: 5
-                  }
-                }}>
-                  <CardContent sx={{ textAlign: 'center', p: 4 }}>
-                    <CloudIcon sx={{ fontSize: 60, color: '#2196F3', mb: 2 }} />
-                    <Typography gutterBottom variant="h5" component="h2" sx={{ fontWeight: 'bold' }}>
-                      Weather Forecast
-                    </Typography>
-                    <Typography variant="body1" color="text.secondary">
-                      Real-time weather data and forecasting to keep you informed about environmental conditions.
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </Grid>
-              <Grid item xs={12} md={4}>
-                <Card sx={{ 
-                  height: '100%',
-                  transition: 'transform 0.3s',
-                  '&:hover': {
-                    transform: 'translateY(-10px)',
-                    boxShadow: 5
-                  }
-                }}>
-                  <CardContent sx={{ textAlign: 'center', p: 4 }}>
-                    <TimelineIcon sx={{ fontSize: 60, color: '#2196F3', mb: 2 }} />
-                    <Typography gutterBottom variant="h5" component="h2" sx={{ fontWeight: 'bold' }}>
-                      Historical Analysis
-                    </Typography>
-                    <Typography variant="body1" color="text.secondary">
-                      Track and analyze historical air quality data to identify patterns and trends.
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </Grid>
+          <Box sx={{ mt: 12, mb: 8 }}>
+            <Typography variant="h3" align="center" sx={{ ...gradientText, mb: 8, fontWeight: 700 }}>
+              Why Choose Our Platform?
+            </Typography>
+            <Grid container spacing={4} justifyContent="center">
+              {[
+                {
+                  icon: <AirQualityIcon sx={{ fontSize: 60, color: '#2196F3' }} />,
+                  title: "Accurate Predictions",
+                  description: "Our advanced ML models provide highly accurate AQI predictions using real-time environmental data and historical patterns."
+                },
+                {
+                  icon: <CloudQueueIcon sx={{ fontSize: 60, color: '#00BFA5' }} />,
+                  title: "Real-time Monitoring",
+                  description: "Stay informed with continuous monitoring of air quality parameters and instant updates on changing conditions."
+                },
+                {
+                  icon: <TimelineIcon sx={{ fontSize: 60, color: '#FF4081' }} />,
+                  title: "Trend Analysis",
+                  description: "Understand air quality patterns with comprehensive historical data analysis and visual trend representations."
+                }
+              ].map((feature, index) => (
+                <Grid item xs={12} sm={6} md={4} key={index}>
+                  <Card sx={{
+                    height: '100%',
+                    borderRadius: '24px',
+                    p: 2,
+                    background: 'rgba(255, 255, 255, 0.9)',
+                    backdropFilter: 'blur(10px)',
+                    ...cardHoverEffect
+                  }}>
+                    <CardContent sx={{ textAlign: 'center', p: 3 }}>
+                      <Box sx={{
+                        mb: 3,
+                        display: 'inline-flex',
+                        p: 2,
+                        borderRadius: '50%',
+                        background: 'rgba(33, 150, 243, 0.1)'
+                      }}>
+                        {feature.icon}
+                      </Box>
+                      <Typography variant="h5" gutterBottom sx={{ fontWeight: 600 }}>
+                        {feature.title}
+                      </Typography>
+                      <Typography variant="body1" color="text.secondary" sx={{ lineHeight: 1.8 }}>
+                        {feature.description}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                </Grid>
+              ))}
             </Grid>
           </Box>
         </Container>
