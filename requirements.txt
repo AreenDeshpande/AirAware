@@ -1,0 +1,13 @@
+Flask
+Flask-Cors
+Flask-PyMongo
+Werkzeug
+PyJWT
+requests
+joblib
+numpy
+prophet
+pandas
+matplotlib
+seaborn
+
