@@ -12,14 +12,21 @@ import numpy as np
 app = Flask(__name__)
 CORS(app)
 
+# Load environment variables
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
 # Configuration
-app.config["MONGO_URI"] = "mongodb://localhost:27017/aqi_prediction"
-app.config['SECRET_KEY'] = 'your-secret-key'  # Change this in production
+app.config["MONGO_URI"] = os.getenv('MONGO_URI')
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 mongo = PyMongo(app)
 
 # Weather API configuration
-WEATHER_API_KEY = 'your-weather-api-key'  # Get from OpenWeatherMap
-WEATHER_API_URL = 'http://api.openweathermap.org/data/2.5/weather'
+WEATHER_API_KEY = os.getenv('API_KEY')  # Get from OpenWeatherMap
+WEATHER_API_URL = 'http://api.openweathermap.org/data/2.5/air_pollution'  # Air pollution API endpoint
+GEO_API_URL = 'http://api.openweathermap.org/geo/1.0/direct'  # Geocoding API endpoint
 
 # Load ML model
 model = joblib.load('model/aqi_model.pkl')
@@ -74,31 +81,41 @@ def login():
 def predict(current_user):
     data = request.json
     try:
-        features = np.array([[
-            float(data['temperature']),
-            float(data['humidity']),
-            float(data['pm25']),
-            float(data['pm10']),
-            float(data['no2']),
-            float(data['so2']),
-            float(data['co'])
-        ]])
+        # Load Prophet models
+        model_no2 = joblib.load('models/model_no2.pkl')
+        model_so2 = joblib.load('models/model_so2.pkl')
+        model_spm = joblib.load('models/model_spm.pkl')
         
-        prediction = model.predict(features)[0]
+        # Get predictions for each pollutant
+        date = data.get('date', datetime.utcnow().strftime('%Y-%m-%d'))
+        no2_pred = float(model_no2.predict(date)[0])
+        so2_pred = float(model_so2.predict(date)[0])
+        spm_pred = float(model_spm.predict(date)[0])
+        
+        # Calculate AQI using the formula
+        # Using a simplified formula for demonstration
+        aqi = (no2_pred * 0.3 + so2_pred * 0.3 + spm_pred * 0.4) * 10
         
         # Save prediction to history
         prediction_record = {
             'user_id': current_user['_id'],
-            'date': datetime.utcnow(),
-            'temperature': data['temperature'],
-            'humidity': data['humidity'],
-            'pm25': data['pm25'],
-            'pm10': data['pm10'],
-            'aqi': float(prediction)
+            'date': datetime.strptime(date, '%Y-%m-%d'),
+            'no2': no2_pred,
+            'so2': so2_pred,
+            'spm': spm_pred,
+            'aqi': float(aqi)
         }
         mongo.db.predictions.insert_one(prediction_record)
         
-        return jsonify({'prediction': float(prediction)})
+        return jsonify({
+            'prediction': {
+                'date': date,
+                'no2': no2_pred,
+                'so2': so2_pred,
+                'spm': spm_pred,
+                'aqi': aqi
+            }
+        })
     except Exception as e:
         return jsonify({'message': str(e)}), 400
 
@@ -106,26 +123,45 @@ def predict(current_user):
 @token_required
 def get_weather(current_user):
     try:
-        params = {
-            'q': 'Mumbai',  # Default city
-            'appid': WEATHER_API_KEY,
-            'units': 'metric'
+        # First get coordinates for Mumbai
+        geo_params = {
+            'q': 'Mumbai,IN',  # Default city
+            'limit': 1,
+            'appid': WEATHER_API_KEY
         }
-        response = requests.get(WEATHER_API_URL, params=params)
-        weather_data = response.json()
+        geo_response = requests.get(GEO_API_URL, params=geo_params)
+        if not geo_response.ok:
+            return jsonify({'message': 'Failed to get location data'}), 400
+            
+        location_data = geo_response.json()
+        if not location_data:
+            return jsonify({'message': 'Location not found'}), 404
+            
+        lat = location_data[0]['lat']
+        lon = location_data[0]['lon']
+        
+        # Get air quality data
+        air_params = {
+            'lat': lat,
+            'lon': lon,
+            'appid': WEATHER_API_KEY
+        }
+        
+        response = requests.get(WEATHER_API_URL, params=air_params)
+        if not response.ok:
+            return jsonify({'message': 'Failed to fetch air quality data'}), 400
+            
+        air_data = response.json()
+        if not air_data.get('list') or not air_data['list']:
+            return jsonify({'message': 'No air quality data available'}), 404
+            
+        current_air = air_data['list'][0]
         
         return jsonify({
-            'temperature': weather_data['main']['temp'],
-            'humidity': weather_data['main']['humidity'],
-            'windSpeed': weather_data['wind']['speed'],
-            'condition': weather_data['weather'][0]['main'],
-            'forecast': [
-                {
-                    'date': (datetime.now() + timedelta(days=i)).strftime('%Y-%m-%d'),
-                    'temperature': weather_data['main']['temp'],
-                    'condition': weather_data['weather'][0]['main']
-                } for i in range(4)
-            ]
+            'main': {
+                'aqi': current_air['main']['aqi']
+            },
+            'components': current_air['components']
         })
     except Exception as e:
         return jsonify({'message': str(e)}), 400

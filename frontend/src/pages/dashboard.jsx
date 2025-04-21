@@ -12,12 +12,6 @@ const Dashboard = () => {
 
   const menuItems = [
     {
-      title: 'Predict AQI',
-      description: 'Get accurate air quality predictions',
-      icon: <AirIcon sx={{ fontSize: 40, color: '#42A5F5' }} />,
-      path: '/predict'
-    },
-    {
       title: 'Weather Info',
       description: 'Check current weather conditions',
       icon: <WbSunnyIcon sx={{ fontSize: 40, color: '#FF9800' }} />,
@@ -30,10 +24,10 @@ const Dashboard = () => {
       path: '/history'
     },
     {
-      title: 'Analytics',
-      description: 'Analyze air quality trends',
-      icon: <TimelineIcon sx={{ fontSize: 40, color: '#9C27B0' }} />,
-      path: '/analytics'
+      title: 'Predict AQI',
+      description: 'Get accurate air quality predictions',
+      icon: <AirIcon sx={{ fontSize: 40, color: '#42A5F5' }} />,
+      path: '/predict'
     }
   ];
 

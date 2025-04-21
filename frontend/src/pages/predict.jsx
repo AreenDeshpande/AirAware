@@ -144,17 +144,61 @@ const Predict = () => {
           </form>
 
           {prediction && (
-            <Paper sx={{ mt: 4, p: 3, backgroundColor: '#e3f2fd' }}>
-              <Typography variant="h5" gutterBottom>
-                Predicted AQI: {prediction}
+            <Box sx={{ mt: 4 }}>
+              <Typography variant="h6" gutterBottom>
+                Predictions for {prediction.date}
               </Typography>
-              <Typography variant="body1">
-                {prediction < 50 ? 'Good air quality' :
-                 prediction < 100 ? 'Moderate air quality' :
-                 prediction < 150 ? 'Unhealthy for sensitive groups' :
-                 'Unhealthy air quality'}
-              </Typography>
-            </Paper>
+              <Grid container spacing={2}>
+                <Grid item xs={12} sm={6} md={3}>
+                  <Card>
+                    <CardContent>
+                      <Typography color="textSecondary" gutterBottom>
+                        NO₂ Level
+                      </Typography>
+                      <Typography variant="h5">
+                        {prediction.no2.toFixed(2)} ppb
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                </Grid>
+                <Grid item xs={12} sm={6} md={3}>
+                  <Card>
+                    <CardContent>
+                      <Typography color="textSecondary" gutterBottom>
+                        SO₂ Level
+                      </Typography>
+                      <Typography variant="h5">
+                        {prediction.so2.toFixed(2)} ppb
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                </Grid>
+                <Grid item xs={12} sm={6} md={3}>
+                  <Card>
+                    <CardContent>
+                      <Typography color="textSecondary" gutterBottom>
+                        SPM Level
+                      </Typography>
+                      <Typography variant="h5">
+                        {prediction.spm.toFixed(2)} μg/m³
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                </Grid>
+                <Grid item xs={12} sm={6} md={3}>
+                  <Card>
+                    <CardContent>
+                      <Typography color="textSecondary" gutterBottom>
+                        AQI
+                      </Typography>
+                      <Typography variant="h5">
+                        {prediction.aqi.toFixed(2)}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                </Grid>
+              </Grid>
+            </Box>
           )}
         </Paper>
       </Container>
